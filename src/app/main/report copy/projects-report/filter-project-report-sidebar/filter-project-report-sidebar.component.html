@@ -1,0 +1,74 @@
+<div class="slideout-content">
+  <!-- Modal to add new user starts-->
+  <div class="modalsd modal-slide-in sdfade new-user-modal" id="modals-slide-in">
+    <div class="modal-dialog">
+      <form class="add-new-user modal-content pt-0" (ngSubmit)="(newUserForm.form.valid)" #newUserForm="ngForm">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          (click)="toggleSidebar('filter-project-report')">
+          ×
+        </button>
+        <div class="modal-header mb-1">
+          <h5 class="modal-title" id="exampleModalLabel">Filter</h5>
+        </div>
+        <div class="modal-body flex-grow-1">
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-fullname">ARGE Sahibi</label>
+            <input type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Ad Soyad"
+              name="project-owner" [(ngModel)]="projectOwner"
+              [class.error]="newUserForm.submitted && FProjectOwnerRef.invalid" #FProjectOwnerRef="ngModel"
+              aria-label="John Doe" aria-describedby="basic-icon-default-fullname2" />
+
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-uname">Brend</label>
+            <input type="text" id="basic-icon-default-uname" class="form-control dt-uname" placeholder="Final"
+              aria-label="final" aria-describedby="basic-icon-default-uname2" name="brand" [(ngModel)]="brand"
+              [class.error]="newUserForm.submitted && FBrandRef.invalid" #FBrandRef="ngModel" />
+
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-email">Alt brend</label>
+            <input type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="Alt brend"
+              aria-label="Alt brend" aria-describedby="basic-icon-default-email2" name="subBrand" [(ngModel)]="subBrand"
+              [class.error]="newUserForm.submitted && FSubBrandRef.invalid" #FSubBrandRef="ngModel" />
+
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-email">Məhsul adı</label>
+            <input type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="Məhsul adı"
+              aria-label="Məhsul adı" aria-describedby="basic-icon-default-email2" name="itemName"
+              [(ngModel)]="itemName" [class.error]="newUserForm.submitted && FItemNameRef.invalid"
+              #FItemNameRef="ngModel" />
+
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-email">Məhsul qiyməti</label>
+            <input type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="2.0"
+              aria-label="2.0" aria-describedby="basic-icon-default-email2" name="item-price" [(ngModel)]="itemPrice"
+              [class.error]="newUserForm.submitted && FItemPriceRef.invalid" #FItemPriceRef="ngModel" />
+
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="user-role">Kateqoriya</label>
+
+            <ng-select [(ngModel)]="TDCategorySelectVar" [items]="categorySelect$ | async" bindLabel="name"
+              bindValue="id" name="categorySelect" placeholder="Kateqoriyanı seçin"></ng-select>
+
+          </div>
+          <div class="form-group mb-2">
+            <label class="form-label" for="user-plan">Status</label>
+            <ng-select [(ngModel)]="TDStatusSelectVar" [items]="statusSelect$ | async" bindLabel="name" bindValue="id"
+              name="statusSelect" placeholder="Status seçin"></ng-select>
+          </div>
+          <button type="submit" class="btn btn-primary mr-1" (click)="submit(newUserForm)" rippleEffect>Yadda
+            saxla</button>
+          <button type="reset" class="btn btn-outline-secondary" (click)="toggleSidebar('filter-project-report')"
+            rippleEffect>
+            Legv et
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Modal to add new user Ends-->
+</div>

@@ -1,0 +1,134 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <form [formGroup]="accountForm" (ngSubmit)="saveUserRoles()">
+    <div class="container">
+      <div class="side">
+      <div class="col-sm-9"> Adı: {{ userData.firstName }}</div>
+      <div class="col-sm-9"> Soyadı: {{ userData.lastName }}</div>
+      <div class="col-sm-9"> Email: {{ userData.email }}</div>
+      <div class="col-sm-9"> Təşkilat: {{ userData.orgName }}</div>
+      </div>
+      <div class="article-0">
+        <div class="form-group">
+          <label for="account-name">Akkount adı</label>
+          <small class="text-muted"> misal:<i>ad.soyad</i></small>
+          <input type="text" class="form-control ml-250" id="account-name" formControlName="accountName"/>
+
+        </div>  
+      </div>
+        <div class="article-1">
+          <button class="btn btn-primary" type="button" rippleEffect (click)="checkUser()">
+            Yoxla
+          </button>
+        </div>
+        <div class="article-2">
+          <div class="custom-control custom-checkbox mb-1">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="cover"
+              formControlName="cover"
+              checked
+            />
+            <label
+              class="custom-control-label"
+              for="cover"
+            >
+              Örtük
+            </label>
+          </div>
+        </div>
+        <div class="article-3">
+          <div class="custom-control custom-checkbox mb-1">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="label"
+              formControlName="label"
+              checked
+            />
+            <label
+              class="custom-control-label"
+              for="label"
+            >
+              Etiket
+            </label>
+          </div>
+        </div>
+        <div class="article-4">
+          <div class="custom-control custom-checkbox mb-1">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="outerPacking"
+              formControlName="outerPacking"
+              checked
+            />
+            <label
+              class="custom-control-label"
+              for="outerPacking"
+            >
+              Xarici paketləmə
+            </label>
+          </div>
+        </div>
+        <div class="article-5">
+          <div class="custom-control custom-checkbox mb-1">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="innerPacking"
+              formControlName="innerPacking"
+              checked
+            />
+            <label
+              class="custom-control-label"
+              for="innerPacking"
+            >
+              Daxili paketləmə
+            </label>
+          </div>
+        </div>
+        <div class="article-6">
+          <div class="custom-control custom-checkbox mb-1">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="newProduct"
+              formControlName="newProduct"
+              checked
+            />
+            <label
+              class="custom-control-label"
+              for="newProduct"
+            >
+              Yeni məhsul
+            </label>
+          </div>
+        </div>
+        <div class="article-7">
+          <div class="custom-control custom-checkbox mb-1">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="project"
+              formControlName="project"
+              checked
+            />
+            <label class="custom-control-label" for="project">
+              Proyekt
+            </label>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="col-sm-12 text-right" >
+          <button class="btn btn-primary btn-xs" type="button" rippleEffect (click)="saveUserRoles()">
+            Yadda saxla
+          </button>
+        </div>
+        </div>
+      </div>
+    </form>
+    </div>
+    
+  </div>

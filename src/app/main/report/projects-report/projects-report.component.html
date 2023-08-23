@@ -1,0 +1,213 @@
+<ng-template #progressModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Proyektin statusu</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group mb-2" *ngIf="innerPacking">
+        <div class="d-flex align-items-start mb-1">
+          <span class="col-sm-4"> Daxili paketləmə: {{ innerPacketProgress }}%</span>
+          <button class="btn btn-secondary btn-sm"
+            (click)="onSubprocessProgressHistory(innerPacketID, progressHistoryModal,'Daxili paketləmə')">Tarixçə</button>
+        </div>
+        <textarea [(ngModel)]="innerPacketDescription" class="form-control" rows="2" id="innerPacketDescription"
+          name="innerPacketDescription" [disabled]="true"></textarea>
+        <hr>
+      </div>
+
+      <div class="form-group mb-2" *ngIf="cover">
+        <div class="d-flex align-items-start mb-1">
+          <span class="col-sm-4">Örtük: {{ coverProgress }}%</span>
+          <button class="btn btn-secondary btn-sm"
+            (click)="onSubprocessProgressHistory(coverID, progressHistoryModal,'Örtük')">Tarixçə</button>
+        </div>
+        <textarea [(ngModel)]="coverDescription" class="form-control" rows="2" id="coverDescription"
+          name="coverDescription" [disabled]="true"></textarea>
+        <hr>
+      </div>
+      <div class="form-group mb-2" *ngIf="label">
+        <div class="d-flex align-items-start mb-1">
+          <span class="col-sm-4">Etiket: {{ labelProgress }}%</span>
+          <button class="btn btn-secondary btn-sm"
+            (click)="onSubprocessProgressHistory(labelID, progressHistoryModal,'Etiket')">Tarixçə</button>
+        </div>
+        <textarea [(ngModel)]="labelDescription" class="form-control" rows="2" id="labelDescription"
+          name="labelDescription" [disabled]="true"></textarea>
+        <hr>
+      </div>
+
+
+      <div class="form-group mb-2" *ngIf="outerPacking">
+        <div class="d-flex align-items-start mb-1">
+          <span class="col-sm-4">Xarici paketləmə: {{ outerPackingProgress }}%</span>
+          <button class="btn btn-secondary btn-sm"
+            (click)="onSubprocessProgressHistory(outerPackingID, progressHistoryModal,'Xarici paketləmə')">Tarixçə</button>
+        </div>
+        <textarea [(ngModel)]="outerPackingDescription" class="form-control" rows="2" id="outerPackingDescription"
+          name="outerPackingDescription" [disabled]="true"></textarea>
+        <hr>
+      </div>
+
+      <div class="form-group mb-2" *ngIf="newProduct">
+        <div class="d-flex align-items-start mb-1">
+          <span class="col-sm-4">Yeni məhsul: {{ newProductProgress }}%</span>
+          <button class="btn btn-secondary btn-sm"
+            (click)="onSubprocessProgressHistory(newProductID, progressHistoryModal,'Yeni məhsul')">Tarixçə</button>
+        </div>
+        <textarea [(ngModel)]="newProductDescription" class="form-control" rows="2" id="newProductDescription"
+          name="newProductDescription"></textarea>
+        <hr>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #progressHistoryModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{ selectedSubprocess }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <app-subprocess-progress *ngFor="let subprocessProgress of subprocessHistory" [report]="subprocessProgress">
+      </app-subprocess-progress>
+    </form>
+  </div>
+</ng-template>
+
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!-- Project Report Datatables -->
+    <section id="ngx-datatable-kitchen-sink">
+      <core-card-snippet [snippetCode]="_snippetCodeKitchenSink">
+        <h4 class="card-title">Projects</h4>
+        <div class="row">
+
+          <div class="col-md-6 col-12">
+            <div class="d-flex justify-content-between align-items-center m-1">
+              <label class="d-flex align-items-center">Göstər
+                <select class="form-control mx-25" (change)="setPageSize($event.target.value)">
+                  <option value=10>10</option>
+                  <option value=25>25</option>
+                  <option value=50>50</option>
+                  <option value=100>100</option>
+                </select>
+                məlumat</label>
+            </div>
+          </div>
+          <div class="col-md-6 col-12 d-flex justify-content-md-end">
+            <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pl-1 pl-md-0 pb-md-0">
+              <label class="d-flex align-items-center">Axtarış<input [(ngModel)]="searchValue" name="searchValue"
+                  type="search" placeholder="Proyekt adı" class="form-control ml-25" (keyup)="filterUpdate($event)"
+                  (search)="filterUpdate($event)" /></label>
+              <button class="btn btn-primary ml-1" rippleEffect (click)="toggleSidebar('filter-project-report')">
+                <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i><span
+                  class="d-none d-sm-inline-block">Filter</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </core-card-snippet>
+    </section>
+    <!--/ Project Report Datatables -->
+
+    <!-- ngx-datatable-row-details -->
+    <ngx-datatable #tableRowDetails [rows]="rows$ | async" class="bootstrap core-bootstrap"
+      [columnMode]="ColumnMode.force" [loadingIndicator]="loading" [headerHeight]="40" [footerHeight]="50"
+      [rowHeight]="58" [scrollbarH]="true" [externalPaging]="true" [externalSorting]="true"
+      [count]="state.paginator.total" [offset]="state.paginator.pages" [limit]="state.paginator.size"
+      (page)="setPage($event)" (sort)="onSort($event)">
+      <!-- Row Detail Template -->
+      <ngx-datatable-row-detail [rowHeight]="50">
+        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+          <div class="ml-75 pl-5 pt-75">
+            <div>
+              <span><strong>Sahibi : </strong> {{ row.owner }}</span>
+              <span class="ml-1"><strong>Hədəf : </strong> {{ row.target }}</span>
+              <span class="ml-1"><strong>Məhsul kodu : </strong> {{ row.itemCode }}</span>
+              <span class="ml-1"><strong>Satış kanalı : </strong> {{ row.saleChannel }}</span>
+              <span class="ml-1"><strong>Risk səviyyəsi : </strong> {{ row.riskRating }}</span>
+            </div>
+          </div>
+        </ng-template>
+      </ngx-datatable-row-detail>
+      <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false"
+        [canAutoResize]="false">
+        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+          <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+            title="Expand/Collapse Row" (click)="rowDetailsToggleExpand(row)">
+          </a>
+        </ng-template>
+      </ngx-datatable-column>
+
+
+      <ngx-datatable-column name="ID" prop="id" [resizeable]="true" [sortable]="true" [width]="70">
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Adı" prop="name" [resizeable]="true" [sortable]="true" [width]="180">
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Brend" prop="brand" [resizeable]="true" [width]="120"></ngx-datatable-column>
+      <ngx-datatable-column name="Məhsul adı" prop="itemName" [width]="120"></ngx-datatable-column>
+      <ngx-datatable-column name="Məhsul qiyməti" prop="itemPrice" [width]="80"></ngx-datatable-column>
+      <ngx-datatable-column name="Kateqoriya" prop="category" [width]="100"></ngx-datatable-column>
+      <ngx-datatable-column name="Proqres" prop="progress" [width]="80">
+        <ng-template let-progress="value" ngx-datatable-cell-template>
+          {{progress}} %
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Status" prop="statusID" [width]="80">
+        <ng-template let-status="value" ngx-datatable-cell-template>
+          <div class="badge badge-pill" [ngClass]="{
+                'badge-light-primary': status == 1,
+                'badge-light-success': status == 3,
+                'badge-light-danger': status == 4,
+                'badge-light-warning': status == 2,
+                'badge-light-info': status == 5
+              }">
+            {{
+            status == 1
+            ? 'Başlanmadı'
+            : status == 2
+            ? 'Davam edir'
+            : status == 3
+            ? 'Tamamlandı'
+            : status == 4
+            ? 'Rədd edildi'
+            : status == 5
+            ? 'Gözləmədə'
+            : 'Gözləmədə'
+            }}
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="~" [width]="50" [sortable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <div class="d-flex align-items-center">
+            <div>
+              <a (click)="openSubprocessProgress(row.id,progressModal)">
+                <i data-feather="eye" class="text-primary cursor-pointer"></i>
+              </a>
+            </div>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+    <!-- ngx-datatable-row-details -->
+  </div>
+  <!-- Filter Sidebar -->
+  <core-sidebar class="modal modal-slide-in sidebar-todo-modal fade" name="filter-project-report"
+    overlayClass="modal-backdrop">
+    <app-filter-project-report-sidebar (fill)="fill()" [_projectState]=_projectState>
+    </app-filter-project-report-sidebar>
+  </core-sidebar>
+  <!--/ Filter Sidebar -->
+</div>

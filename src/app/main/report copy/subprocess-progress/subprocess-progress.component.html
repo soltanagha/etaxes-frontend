@@ -1,0 +1,9 @@
+
+<div class="form-group mb-2">
+    <div class="d-flex align-items-start mb-1">
+        <span class="col-sm-4"> {{ report.name }} :  {{ report.progress }}%</span>
+    </div>
+    <textarea [(ngModel)]="report.description" class="form-control" rows="2" id="description"
+              name="description" [disabled]="true"></textarea>
+    <hr>
+</div>

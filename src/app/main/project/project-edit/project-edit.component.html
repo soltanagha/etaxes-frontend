@@ -1,0 +1,893 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <div class="modern-horizontal-wizard">
+      <div id="stepper3" class="bs-stepper wizard-modern modern-wizard-example">
+        <div class="bs-stepper-header">
+          <div class="step" data-target="#project-details">
+            <button type="button" class="step-trigger">
+              <span class="bs-stepper-box">
+                <i data-feather="file-text" class="font-medium-3"></i>
+              </span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Proyekt detalları</span>
+                <span class="bs-stepper-subtitle">
+                  Məlumatların daxil edilməsi
+                </span>
+              </span>
+            </button>
+          </div>
+          <div class="line">
+            <i data-feather="chevron-right" class="font-medium-2"></i>
+          </div>
+          <div class="step" data-target="#sub-project-details">
+            <button type="button" class="step-trigger" [disabled]="false">
+              <span class="bs-stepper-box">
+                <i data-feather="user" class="font-medium-3"></i>
+              </span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Alt proseslər</span>
+                <span class="bs-stepper-subtitle">
+                  Proseslərin daxil edilməsi
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="bs-stepper-content">
+          <form [formGroup]="projectForm" (ngSubmit)="submitForm()">
+            <div
+              id="project-details"
+              class="content"
+              formGroupName="projectDetails"
+            >
+              <div class="row invoice-add">
+                <!-- Project Details Left starts -->
+                <div class="col-xl-9 col-md-8 col-12">
+                  <div class="card invoice-preview-card">
+                    <!-- Header starts -->
+                    <div class="card-body invoice-padding pb-0">
+                      <h4 class="invoice-title">Yeni Proyekt</h4>
+                    </div>
+                    <hr class="invoice-spacing" />
+                    <div class="card-body invoice-padding pb-0">
+                      <div
+                        class="d-flex justify-content-between flex-md-row flex-column invoice-spacing mt-0"
+                      >
+                        <div>
+                          <div class="invoice-number-date mt-md-0 mt-4">
+                            <div class="d-flex align-items-center mb-1">
+                              <span class="title">Proyekt adı:</span>
+                              <input
+                                id="project_name"
+                                name="project_name"
+                                type="text"
+                                class="form-control ml-50"
+                                placeholder="Proyekt adı"
+                                formControlName="name"
+                              />
+                            </div>
+                            <div class="d-flex align-items-center mb-1">
+                              <span class="title">İnnovasyon stratejisi:</span>
+                              <input
+                                type="text"
+                                class="form-control ml-50"
+                                placeholder="Proyekt hədəfi"
+                                formControlName="target"
+                              />
+                            </div>
+                            <div class="d-flex align-items-center mb-1">
+                              <span class="title">Proyekt sahibi:</span>
+                              <input
+                                type="text"
+                                class="form-control ml-50"
+                                placeholder="Proyekt sahibi"
+                                formControlName="owner"
+                              />
+                            </div>
+                            <div class="d-flex align-items-center mb-1">
+                              <span class="title">ARGE sahibi:</span>
+                              <input
+                                type="text"
+                                class="form-control ml-50"
+                                placeholder="ARGE sahibi"
+                                formControlName="argeOwner"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="invoice-number-date mt-md-0 mt-2">
+                          <div class="d-flex align-items-center mb-1">
+                            <span class="title2">Brend:</span>
+                            <ng-select
+                              name="brand"
+                              [items]="brandSelect$ | async"
+                              bindLabel="name"
+                              bindValue="id"
+                              placeholder="Brendi seçin"
+                              formControlName="brandID"
+                              style="width: 165px !important"
+                            >
+                            </ng-select>
+                          </div>
+                          <div class="d-flex align-items-center mb-1">
+                            <span class="title2">Alt brend:</span>
+                            <ng-select
+                              [items]="subBrandSelect$ | async"
+                              bindLabel="name"
+                              bindValue="id"
+                              name="subBrand"
+                              placeholder="Alt brendi seçin"
+                              style="width: 165px !important"
+                              formControlName="subBrandID"
+                            ></ng-select>
+                          </div>
+                          <div class="d-flex align-items-center mb-1">
+                            <span class="title2">Alt Kateqoriya:</span>
+                            <ng-select
+                              [items]="categorySelect$ | async"
+                              bindLabel="name"
+                              bindValue="id"
+                              name="category"
+                              placeholder="Kateqoriyanı seçin"
+                              style="width: 165px !important"
+                              formControlName="categoryID"
+                            ></ng-select>
+                          </div>
+                          <div class="d-flex align-items-center mb-1">
+                            <span class="title2">Satış kanalı:</span>
+                            <ng-select
+                              [items]="saleChannelSelect$ | async"
+                              bindLabel="name"
+                              bindValue="id"
+                              name="saleChannel"
+                              placeholder="Satış kanalı"
+                              style="width: 165px !important"
+                              formControlName="saleChannelID"
+                            ></ng-select>
+                          </div>
+                        </div>
+                      </div>
+                      <!--div class="d-flex justify-content-between flex-md-row flex-column invoice-spacing mt-0">
+                        <div class="invoice-number-date mt-md-0 mt-4">
+                          <div class="d-flex align-items-center mb-1">
+                            <span class="title2">Satış kanalı:</span>
+                            <ng-select
+                              [items]="saleChannelSelect$ | async"
+                              [multiple]="true"
+                              bindLabel="name"
+                              bindValue="id"
+                              name="saleChannel"
+                              placeholder="Satış kanalı"
+                              formControlName="saleChannelID"
+                            ></ng-select>
+                          </div>
+                        </div>
+                      </div-->
+                    </div>
+                    <!-- Header ends -->
+
+                    <hr class="invoice-spacing" />
+
+                    <!-- Item details starts -->
+                    <div class="card-body invoice-padding pt-0">
+                      <div class="row row-bill-to invoice-spacing">
+                        <div class="col-xl-7 col-bill-to pl-0">
+                          <div class="d-flex align-items-center mb-1">
+                            <span class="col-sm-4">Məhsul kodu:</span>
+
+                            <div class="col-sm-8">
+                              <input
+                                type="text"
+                                id="item-code"
+                                class="form-control"
+                                name="itemCode"
+                                placeholder="Məhsul kodu"
+                                formControlName="itemCode"
+                              />
+                            </div>
+                          </div>
+                          <div class="d-flex align-items-center mb-1">
+                            <span class="col-sm-4">Məhsul adı:</span>
+
+                            <div class="col-sm-8">
+                              <input
+                                type="text"
+                                id="item-name"
+                                class="form-control"
+                                name="itemName"
+                                placeholder="Məhsul adı"
+                                formControlName="itemName"
+                              />
+                            </div>
+                          </div>
+                          <div class="d-flex align-items-center mb-1">
+                            <span class="col-sm-4">Məhsul qiyməti:</span>
+
+                            <div class="col-sm-8">
+                              <input
+                                type="number"
+                                id="item-price"
+                                class="form-control"
+                                name="itemPrice"
+                                placeholder="Məhsul qiyməti"
+                                formControlName="itemPrice"
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-xl-5 col-bill-to pl-0">
+                          <div class="d-flex align-items-center mb-1">
+                            <span class="col-sm-4">Məhsul qrupu:</span>
+                            <ng-select
+                              [items]="itemGroupSelect$ | async"
+                              bindLabel="name"
+                              bindValue="id"
+                              name="itemGroupID"
+                              placeholder="Məhsul qrupunu seçin"
+                              #select
+                              class="col-sm-7"
+                              formControlName="itemGroupID"
+                            ></ng-select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Item details ends -->
+
+                    <hr class="invoice-spacing" />
+
+                    <!-- TurnOver and risk details starts -->
+                    <div class="card-body invoice-padding">
+                      <div class="row row-bill-to invoice-spacing">
+                        <div class="col-xl-7 col-bill-to pl-0">
+                          <div class="d-flex align-items-center mb-1">
+                            <span class="col-sm-4">Brut Karlılık:</span>
+
+                            <div class="col-sm-8">
+                              <input
+                                type="number"
+                                id="benefit"
+                                class="form-control"
+                                name="benefit"
+                                placeholder="Gəlir"
+                                formControlName="profitability"
+                              />
+                            </div>
+                          </div>
+                          <div class="d-flex align-items-center mb-1">
+                            <span class="col-sm-4">
+                              Hesablanmış satış dövriyyəsi:
+                            </span>
+
+                            <div class="col-sm-8">
+                              <input
+                                type="number"
+                                id="sales-turnover"
+                                class="form-control"
+                                name="estimatedSalesTurnover"
+                                placeholder="Hesablanmış satış dövriyyəsi"
+                                formControlName="estimatedSalesTurnover"
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-xl-5 col-bill-to pl-0">
+                          <div class="d-flex align-items-center mb-1">
+                            <span class="col-sm-4">Incremental dövriyyə:</span>
+
+                            <div class="col-sm-8">
+                              <input
+                                type="number"
+                                id="incremental-turnover"
+                                class="form-control"
+                                name="incrementalTurnover"
+                                placeholder="Incremental dövriyyə"
+                                formControlName="incrementalTurnover"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- TurnOver and risk details ends -->
+
+                    <hr class="invoice-spacing mt-0" />
+
+                    <div class="card-body invoice-padding py-0">
+                      <!-- Invoice Note starts -->
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="form-group mb-2">
+                            <div class="custom-control custom-checkbox mb-1">
+                              <input
+                                type="checkbox"
+                                class="custom-control-input"
+                                id="marketResearch"
+                                formControlName="marketResearch"
+                                checked
+                              />
+                              <label
+                                class="custom-control-label"
+                                for="marketResearch"
+                              >
+                                Bazar araşdırması
+                              </label>
+                            </div>
+                            <textarea
+                              class="form-control"
+                              rows="2"
+                              formControlName="marketResearchDescription"
+                              id="marketResearchDescription"
+                            ></textarea>
+                          </div>
+                          <div class="form-group mb-2">
+                            <div class="custom-control custom-checkbox mb-1">
+                              <input
+                                type="checkbox"
+                                class="custom-control-input"
+                                id="investment"
+                                formControlName="investment"
+                                checked
+                              />
+                              <label
+                                class="custom-control-label"
+                                for="investment"
+                              >
+                                İnvestisiya
+                              </label>
+                            </div>
+                            <textarea
+                              class="form-control"
+                              rows="2"
+                              id="investmentDescription"
+                              formControlName="investmentDescription"
+                            ></textarea>
+                          </div>
+                          <div class="form-group mb-2">
+                            <div class="d-flex align-items-start mb-1">
+                              <span class="col-sm-2">Risk səviyyəsi:</span>
+                              <ng-select
+                                [items]="riskRatingSelect$ | async"
+                                bindLabel="name"
+                                bindValue="id"
+                                name="riskRating"
+                                formControlName="riskRatingID"
+                                placeholder="Risk səviyyəsini seçin"
+                                #select
+                                class="col-sm-6"
+                              ></ng-select>
+                            </div>
+                            <textarea
+                              class="form-control"
+                              rows="2"
+                              id="riskRatingDescription"
+                              formControlName="riskRatingDescription"
+                            >
+                            </textarea>
+                          </div>
+                          <div class="form-group mb-2">
+                            <div class="d-flex align-items-start mb-1">
+                              <span class="col-sm-2">Açıqlama:</span>
+                            </div>
+                            <textarea
+                              class="form-control"
+                              rows="2"
+                              id="description"
+                              formControlName="description"
+                            >
+                            </textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Invoice Note ends -->
+                    </div>
+                  </div>
+                </div>
+                <!-- Project Details Left ends -->
+                <!-- Project Details Right starts -->
+                <div class="col-xl-3 col-md-4 col-12 mt-md-0 mt-2">
+                  <div class="card">
+                    <div class="card-body">
+                      <button
+                        type="button"
+                        (click)="modernHorizontalNext()"
+                        class="btn btn-outline-primary btn-block mb-75"
+                        rippleEffect
+                      >
+                        Sonrakı
+                      </button>
+                    </div>
+                  </div>
+                  <div class="mt-2">
+                    <p class="mb-50">Proyekt status</p>
+                    <ng-select
+                      [items]="statusSelect$ | async"
+                      bindLabel="name"
+                      bindValue="id"
+                      name="statusSelect"
+                      placeholder="Status seç"
+                      formControlName="statusID"
+                      #statusSelected
+                    ></ng-select>
+
+                    <div class="invoice-terms mt-1">
+                      <div class="d-flex justify-content-between">
+                        <fieldset class="form-group">
+                          <p class="mb-50">File</p>
+                          <div class="custom-file">
+                            <input
+                              (change)="onFileChange('filePath', $event)"
+                              type="file"
+                              class="custom-file-input"
+                              ng2FileSelect
+                              [uploader]="uploader"
+                              name="file"
+                              formControlName="file"
+                              id="file-upload-single"
+                            />
+
+                            <label class="custom-file-label">
+                              {{ filePathLabel }}
+                            </label>
+
+                            <button
+                              type="button"
+                              class="btn btn-primary btn-block mb-75"
+                              style="padding: 10px; margin-top: 10px"
+                              (click)="downloadFile(id)"
+                              [disabled]="isFile('filePath')"
+                            >
+                              File yüklə
+                            </button>
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Project Details End Right ends -->
+              </div>
+            </div>
+
+            <div
+              id="sub-project-details"
+              class="content"
+              formGroupName="projectSubProcesses"
+            >
+              <div class="row invoice-add">
+                <div class="col-xl-9 col-md-8 col-12">
+                  <div class="form-group mb-2">
+                    <div class="container">
+                      <div class="row">
+                        <div class="co-4">
+                          <div
+                            class="custom-control custom-checkbox custom-file mb-1"
+                          >
+                            <input
+                              (change)="
+                                onCheckBoxChange('innerPacking', $event)
+                              "
+                              type="checkbox"
+                              class="custom-control-input"
+                              id="innerPacking"
+                              name="innerPacking"
+                              formControlName="innerPacking"
+                            />
+                            <label
+                              class="custom-control-label"
+                              for="innerPacking"
+                            >
+                              Daxili paketləmə
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-5" style="margin-left: 10px">
+                          <input
+                            type="file"
+                            (change)="onFileChange('innerPackingFile', $event)"
+                            class="custom-file-input col-sm"
+                            ng2FileSelect
+                            [uploader]="uploader"
+                            id="inner-packing-file"
+                            [disabled]="!isInnerPackingPermission"
+                          />
+
+                          <label class="custom-file-label">
+                            {{ innerPackingFileLabel }}
+                          </label>
+                        </div>
+                        <div class="col-1">
+                          <button
+                            type="button"
+                            class="btn btn-primary"
+                            [disabled]="
+                              isFile('innerPackingFile') ||
+                              !isInnerPackingPermission
+                            "
+                            (click)="
+                              downloadSubProcessesFile('innerPackingFile')
+                            "
+                          >
+                            <i
+                              data-feather="download"
+                              class="font-medium-2"
+                            ></i>
+                          </button>
+                        </div>
+
+                        <div class="col-1" style="margin-bottom: 10px">
+                          <!--button
+                            type="button"
+                            class="btn btn-primary"
+                            [disabled]="!isInnerPackingPermission">
+                            <i data-feather="send" class="font-medium-2" ></i>
+                          </button-->
+                        </div>
+
+                        <div
+                          class="col-2"
+                          style="margin-bottom: 10px; margin-top: 10px"
+                        >
+                          <!-- <span style="color: rgb(43, 226, 67);">{{ innerPackingStatusLabel }}</span> -->
+                        </div>
+                      </div>
+                    </div>
+                    <textarea
+                      class="form-control"
+                      rows="2"
+                      id="innerPackingDescription"
+                      name="innerPackingDescription"
+                      formControlName="innerPackingDescription"
+                    >
+                    </textarea>
+                  </div>
+
+                  <div class="form-group mb-2">
+                    <div class="container">
+                      <div class="row">
+                        <div class="co-4">
+                          <div
+                            class="custom-control custom-checkbox custom-file mb-1"
+                          >
+                            <input
+                              (change)="onCheckBoxChange('cover', $event)"
+                              type="checkbox"
+                              class="custom-control-input"
+                              id="cover"
+                              name="cover"
+                              formControlName="cover"
+                            />
+                            <label class="custom-control-label" for="cover">
+                              Örtük
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-5" style="margin-left: 10px">
+                          <input
+                            (change)="onFileChange('coverFile', $event)"
+                            type="file"
+                            class="custom-file-input col-sm"
+                            ng2FileSelect
+                            [uploader]="uploader"
+                            name="coverFile"
+                            id="cover-file"
+                            [disabled]="!isCoverPermission"
+                          />
+                          <label class="custom-file-label">
+                            {{ coverFileLabel }}
+                          </label>
+                        </div>
+                        <div class="col-1">
+                          <button
+                            type="button"
+                            class="btn btn-primary"
+                            [disabled]="
+                              isFile('coverFile') || !isCoverPermission
+                            "
+                            (click)="downloadSubProcessesFile('coverFile')"
+                          >
+                            <i
+                              data-feather="download"
+                              class="font-medium-2"
+                            ></i>
+                          </button>
+                        </div>
+
+                        <div class="col-1" style="margin-bottom: 10px">
+                          <!-- <button
+                            type="button"
+                            class="btn btn-primary"
+                            [disabled]="!isCoverPermission"
+                            (click)="sendSubprocess('coverStatusLabel')">
+                            <i data-feather="send" class="font-medium-2" ></i>
+                        </button> -->
+                        </div>
+
+                        <div
+                          class="col-2"
+                          style="margin-bottom: 10px; margin-top: 10px"
+                        >
+                          <!-- <span style="color: rgb(43, 226, 67);">{{ coverStatusLabel }}</span> -->
+                        </div>
+                      </div>
+                    </div>
+                    <textarea
+                      class="form-control"
+                      rows="2"
+                      id="coverDescription"
+                      name="coverDescription"
+                      formControlName="coverDescription"
+                    ></textarea>
+                  </div>
+                  <div class="form-group mb-2">
+                    <div class="container">
+                      <div class="row">
+                        <div class="co-4">
+                          <div class="custom-control custom-checkbox mb-1">
+                            <input
+                              (change)="onCheckBoxChange('label', $event)"
+                              type="checkbox"
+                              class="custom-control-input"
+                              id="label"
+                              name="label"
+                              formControlName="label"
+                            />
+                            <label class="custom-control-label" for="label">
+                              Etiket
+                            </label>
+                          </div>
+                        </div>
+                        <div
+                          class="col-5"
+                          style="margin-left: 10px; margin-bottom: 10px"
+                        >
+                          <input
+                            type="file"
+                            (change)="onFileChange('labelFile', $event)"
+                            class="custom-file-input col-sm"
+                            ng2FileSelect
+                            [uploader]="uploader"
+                            name="labelFile"
+                            id="label-file-single"
+                            [disabled]="!isLabelPermission"
+                          />
+                          <label class="custom-file-label">
+                            {{ labelFileLabel }}
+                          </label>
+                        </div>
+                        <div class="col-1" style="margin-bottom: 10px">
+                          <button
+                            type="button"
+                            class="btn btn-primary"
+                            [disabled]="
+                              isFile('labelFile') || !isLabelPermission
+                            "
+                            (click)="downloadSubProcessesFile('labelFile')"
+                          >
+                            <i
+                              data-feather="download"
+                              class="font-medium-2"
+                            ></i>
+                          </button>
+                        </div>
+
+                        <div class="col-1" style="margin-bottom: 10px">
+                          <!-- <button
+                            type="button"
+                            class="btn btn-primary"
+                            [disabled]="!isLabelPermission"
+                            (click)="sendSubprocess('labelStatusLabel')">
+                            <i data-feather="send" class="font-medium-2" ></i>
+                        </button> -->
+                        </div>
+
+                        <div
+                          class="col-2"
+                          style="margin-bottom: 10px; margin-top: 10px"
+                        >
+                          <!-- <span style="color: rgb(43, 226, 67);">{{ labelStatusLabel }}</span> -->
+                        </div>
+                      </div>
+                    </div>
+                    <textarea
+                      class="form-control"
+                      rows="2"
+                      id="labelDescription"
+                      name="labelDescription"
+                      formControlName="labelDescription"
+                    ></textarea>
+                  </div>
+                  <div class="form-group mb-2">
+                    <div class="container">
+                      <div class="row">
+                        <div class="co-4">
+                          <div class="custom-control custom-checkbox mb-1">
+                            <input
+                              (change)="
+                                onCheckBoxChange('outerPacking', $event)
+                              "
+                              type="checkbox"
+                              class="custom-control-input"
+                              id="outerPacking"
+                              name="outerPacking"
+                              formControlName="outerPacking"
+                            />
+                            <label
+                              class="custom-control-label"
+                              for="outerPacking"
+                            >
+                              Xarici paketləmə
+                            </label>
+                          </div>
+                        </div>
+                        <div
+                          class="col-5"
+                          style="margin-left: 10px; margin-bottom: 10px"
+                        >
+                          <input
+                            (change)="onFileChange('outerPackingFile', $event)"
+                            type="file"
+                            class="custom-file-input col-sm"
+                            ng2FileSelect
+                            [uploader]="uploader"
+                            name="outerPackingFile"
+                            id="file-upload-single"
+                            [disabled]="!isOuterPackingPermission"
+                          />
+                          <label class="custom-file-label">
+                            {{ outerPackingFileLabel }}
+                          </label>
+                        </div>
+                        <div class="col-1" style="margin-bottom: 10px">
+                          <button
+                            type="button"
+                            class="btn btn-primary"
+                            [disabled]="
+                              isFile('outerPackingFile') ||
+                              !isOuterPackingPermission
+                            "
+                            (click)="
+                              downloadSubProcessesFile('outerPackingFile')
+                            "
+                          >
+                            <i
+                              data-feather="download"
+                              class="font-medium-2"
+                            ></i>
+                          </button>
+                        </div>
+                        <div class="col-1" style="margin-bottom: 10px">
+                          <!-- <button type="button" class="btn btn-primary" [disabled]="!isOuterPackingPermission"
+                            (click)="sendSubprocess('outerPackingStatusLabel')">
+                            <i data-feather="send" class="font-medium-2"></i>
+                          </button> -->
+                        </div>
+
+                        <div
+                          class="col-2"
+                          style="margin-bottom: 10px; margin-top: 10px"
+                        >
+                          <!-- <span style="color: rgb(43, 226, 67);">{{ outerPackingStatusLabel }}</span> -->
+                        </div>
+                      </div>
+                    </div>
+                    <textarea
+                      class="form-control"
+                      rows="2"
+                      id="outerPackingDescription"
+                      name="outerPackingDescription"
+                      formControlName="outerPackingDescription"
+                    ></textarea>
+                  </div>
+
+                  <div
+                    class="form-group mb-2"
+                    ng-class="{ 'my-disable': !isNewProductPermission }"
+                  >
+                    <div class="container">
+                      <div class="row">
+                        <div class="co-4">
+                          <div class="custom-control custom-checkbox mb-1">
+                            <input
+                              (change)="onCheckBoxChange('newProduct', $event)"
+                              type="checkbox"
+                              class="custom-control-input"
+                              id="newProduct"
+                              name="newProduct"
+                              formControlName="newProduct"
+                              checked
+                            />
+                            <label
+                              class="custom-control-label"
+                              for="newProduct"
+                            >
+                              Yeni məhsul
+                            </label>
+                          </div>
+                        </div>
+                        <div
+                          class="col-5"
+                          style="margin-left: 10px; margin-bottom: 10px"
+                        >
+                          <input
+                            (change)="onFileChange('newProductFile', $event)"
+                            type="file"
+                            class="custom-file-input col-sm"
+                            ng2FileSelect
+                            [uploader]="uploader"
+                            name="newProductFile"
+                            id="file-upload-single"
+                            [disabled]="!isNewProductPermission"
+                          />
+                          <label class="custom-file-label">
+                            {{ newProductFileLabel }}
+                          </label>
+                        </div>
+                        <div class="col-1" style="margin-bottom: 10px">
+                          <button
+                            type="button"
+                            class="btn btn-primary"
+                            [disabled]="
+                              isFile('newProductFile') ||
+                              !isNewProductPermission
+                            "
+                            (click)="downloadSubProcessesFile('newProductFile')"
+                          >
+                            <i
+                              data-feather="download"
+                              class="font-medium-2"
+                            ></i>
+                          </button>
+                        </div>
+
+                        <div class="col-1" style="margin-bottom: 10px">
+                          <!-- <button type="button" class="btn btn-primary" [disabled]=" !isNewProductPermission"
+                            (click)="sendSubprocess('newProductStatusLabel')">
+                            <i data-feather="send" class="font-medium-2"></i>
+                          </button> -->
+                        </div>
+
+                        <div
+                          class="col-2"
+                          style="margin-bottom: 10px; margin-top: 10px"
+                        >
+                          <!-- <span style="color: rgb(43, 226, 67);">{{ newProductStatusLabel }}</span> -->
+                        </div>
+                      </div>
+                    </div>
+                    <textarea
+                      class="form-control"
+                      rows="2"
+                      id="newProductDescription"
+                      name="newProductDescription"
+                      formControlName="newProductDescription"
+                    ></textarea>
+                  </div>
+                </div>
+                <!-- Invoice Add Right starts -->
+                <div class="col-xl-3 col-md-4 col-12 mt-md-0 mt-2">
+                  <div class="card">
+                    <div class="card-body">
+                      <button
+                        type="submit"
+                        class="btn btn-outline-primary btn-block"
+                        rippleEffect
+                        [disabled]="!projectForm.valid"
+                      >
+                        Yadda saxla
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Invoice Add Right ends -->
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

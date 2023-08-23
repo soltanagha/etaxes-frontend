@@ -1,0 +1,39 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <div class="row">
+      <div class="col-12 mb-50">
+        <button class="btn btn-primary ml-1" rippleEffect (click)="addNewUserRole()">
+          <i data-feather="plus" class="mr-0 mr-sm-1"></i><span class="d-none d-sm-inline-block">Yeni istifadəçi əlavə et</span>
+        </button>
+      </div>
+      
+      
+    </div>
+    <ngx-datatable [rows]="kitchenSinkRows" [rowHeight]="58" class="bootstrap core-bootstrap" [limit]="10"
+      [columnMode]="ColumnMode.force" [headerHeight]="40" [footerHeight]="50" [scrollbarH]="true"
+      [selectionType]="SelectionType.checkbox" [limit]="basicSelectedOption">
+      
+      <ngx-datatable-column name="ID" prop="id" [width]="80"></ngx-datatable-column>
+      
+      <ngx-datatable-column name="Account Name" prop="accountName" [width]="300"></ngx-datatable-column>
+      <ngx-datatable-column name="Email" prop="email" [width]="300"></ngx-datatable-column>
+      <ngx-datatable-column name="Təşkilat adı" prop="orgName" [width]="250"></ngx-datatable-column>
+      <ngx-datatable-column name="Proyekt" prop="project" [width]="90"></ngx-datatable-column>
+      <ngx-datatable-column name="Örtük" prop="cover" [width]="80"></ngx-datatable-column>
+      <ngx-datatable-column name="Etiket" prop="label" [width]="80"></ngx-datatable-column>
+      <ngx-datatable-column name="Daxili paketləmə" prop="innerPacking" [width]="140"></ngx-datatable-column>
+      <ngx-datatable-column name="Xarici paketləmə" prop="outerPacking" [width]="140"></ngx-datatable-column>
+      <ngx-datatable-column name="Yeni məhsul" prop="newProduct" [width]="120"></ngx-datatable-column>
+      
+      <ngx-datatable-column name="Actions" [width]="120" [sortable]="false">
+        <ng-template let-row="row"  ngx-datatable-cell-template>
+          <div class="d-flex align-items-center">
+          <a (click)="editUserRoles(row.id)">
+            <i data-feather="edit" class="text-primary cursor-pointer"></i>
+          </a>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

@@ -1,0 +1,116 @@
+
+@import '@core/scss/base/pages/app-invoice.scss';
+@import '@core/scss/angular/libs/flatpickr.component.scss';
+@import '@core/scss/angular/libs/select.component.scss';
+@import "@ng-select/ng-select/themes/default.theme.css";
+/**
+ * CSS from the Layout Generator/Tool
+ */
+ .container {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-areas:
+    "article-0 article-1 side"
+    "article-2 article-3 side"
+    "article-4 article-5 side"
+    "article-6 article-7 side"
+    "footer footer footer";
+    grid-template-columns: 40% 20% 40%;
+    grid-template-rows: 70px 40px 40px 40px 60px;
+  }
+  
+  .header {
+    grid-area: header;
+  }
+  .side {
+    grid-area: side;
+  }
+  .article-0 {
+    grid-area: article-0;
+    align-items: start;
+  }
+  .article-1 {
+    grid-area: article-1;
+  }
+  .article-2 {
+    grid-area: article-2;
+  }
+  .article-3 {
+    grid-area: article-3;
+  }
+  .article-4 {
+    grid-area: article-4;
+  }
+  .article-5 {
+    grid-area: article-5;
+  }
+  .article-6 {
+    grid-area: article-6;
+  }
+  .article-7 {
+    grid-area: article-7;
+  }
+  .footer {
+    grid-area: footer;
+  }
+  
+  /**
+   * Custom CSS added here 
+   */
+  body {
+    font-family: "Raleway", sans-serif;
+    background-color: #fffffe;
+    padding: 1rem;
+  }
+  .container {
+    max-width: 980px;
+    min-height: calc(100vh - 3rem);
+    margin: 0 auto;
+    gap: 1em 1em;
+  } 
+  
+  .side {
+    justify-items: stretch;
+    display: grid;
+    place-content: left;
+    font-size: 1rem;
+    color: hsl(177, 51%, 23%);
+    background-color: hsl(177,51%, 82%);
+    align-content: start;
+    
+  }
+.col-sm-9 {
+  padding-left: 0px;
+}
+  .container > * {
+    justify-items: stretch;
+    display: grid;
+    place-content: left;
+    border-radius: 5px;
+    font-size: 1rem;
+    padding: 1rem;
+    letter-spacing: 0.05rem;
+  }
+  .header, .footer {
+    color: hsl(22, 78%, 26%);
+    padding: 0px;
+    //background-color: hsl(48, 96%, 89%);
+  }
+ 
+  [class^="article"] {
+    width: 100%;
+    border: none;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .container {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }  
+    .container > * {
+      grid-column: 1 / -1 !important;
+      grid-row: auto !important;
+    }
+  }
+  

@@ -1,0 +1,26 @@
+@import '@core/scss/base/pages/app-invoice.scss';
+@import '@core/scss/angular/libs/flatpickr.component.scss';
+@import '@core/scss/angular/libs/select.component.scss';
+@import "@ng-select/ng-select/themes/default.theme.css";
+@import '@core/scss/angular/libs/form-wizard.component.scss';
+
+.more-options-dropdown {
+  white-space: normal;
+}
+
+.div-disable{
+  pointer-events:none;
+}
+.disable-whole-div__cover {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background-color: #ddd;
+  opacity: 0.3;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+}

@@ -1,0 +1,60 @@
+@import "@core/scss/base/bootstrap-extended/include"; // Bootstrap includes
+@import "@core/scss/base/components/include"; // Components includes
+
+// To open dd on right
+.dropdown-menu-right {
+	right: 0 !important;
+	left: auto !important;
+}
+
+// Cart Touchspin
+.touchspin-cart {
+	.touchspin-wrapper {
+		width: 6.4rem;
+	}
+	&:focus-within {
+		box-shadow: none !important;
+	}
+}
+
+app-navbar-bookmark {
+	display: flex;
+}
+
+// Apply style on window scroll for navbar static type
+.navbar-static-style-on-scroll {
+	background-color: #fff !important;
+	box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 20px 0px !important;
+}
+
+// Dark Layout
+.dark-layout {
+	.navbar-container {
+		.search-input {
+			.search-list {
+				li {
+					&.auto-suggestion {
+						&:hover {
+							background-color: $theme-dark-body-bg;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.circular--portrait {
+	position: relative;
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+	border-radius: 50%;
+	box-shadow: 0 4px 8px 0 rgb(34 41 47 / 12%), 0 2px 4px 0 rgb(34 41 47 / 8%);
+}
+
+.circular--portrait img {
+	width: 100%;
+	height: auto;
+	margin-top: -3px;
+}
